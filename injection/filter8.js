@@ -170,7 +170,7 @@ function filterOn(pixies, bg) {
   @font-face {
     font-family: 'PixelifySans';
     font-style: normal;
-    src: url('${chrome.runtime.getURL(
+    src: url('${browser.runtime.getURL(
       "assets/PixelifySans-Regular.woff2"
     )}') format('woff2');
   }
@@ -179,7 +179,7 @@ function filterOn(pixies, bg) {
     font-family: 'PixelifySans' !important;
     border-radius: 0 !important;
   }
-  #inject_overlay_filter8 {${bg ? `\nbackground-image: url('${chrome.runtime.getURL(backgrounds[index])}');` : ""}
+  #inject_overlay_filter8 {${bg ? `\nbackground-image: url('${browser.runtime.getURL(backgrounds[index])}');` : ""}
     top: 0;
     left: 0;
     right: 0;
@@ -210,7 +210,7 @@ function filterOn(pixies, bg) {
       square.style.position = "absolute";
       square.style.width = "100px";
       square.style.height = "100px";
-      square.style.background = `url("${chrome.runtime.getURL(
+      square.style.background = `url("${browser.runtime.getURL(
         "assets/" +
           possibleAssets[Math.floor(Math.random() * possibleAssets.length)]
       )}")`;
@@ -245,7 +245,7 @@ function cycle() {
   filterOn(funPixies, funOverlay);
 }
 
-chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
+browser.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
   // if the popup is asking for state to update its rendering state
   if (request.action === "status") {
     sendResponse({ status: filtering, scale: scalar, pixiesVal: funPixies, overlayVal: funOverlay });

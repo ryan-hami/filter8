@@ -15,7 +15,7 @@ switchLogo();
 // enable tab binding for independent behavior
 async function getCurrentTab() {
   let queryOptions = { active: true, lastFocusedWindow: true };
-  let [tab] = await chrome.tabs.query(queryOptions);
+  let [tab] = await browser.tabs.query(queryOptions);
   return tab;
 }
 
@@ -29,7 +29,7 @@ async function fetchStatus() {
   }
 
   try {
-    const response = await chrome.tabs.sendMessage(tab.id, {
+    const response = await browser.tabs.sendMessage(tab.id, {
       action: "status",
     });
     var bool = response.status;
@@ -75,17 +75,17 @@ logo.addEventListener("click", async () => {
   const tab = await getCurrentTab();
 
   try {
-    if (tab.url.startsWith("chrome://")) {
+    if (tab.url.startsWith("about:")) {
       setStatusText("no work here");
       return;
     }
     if (deadLocked) {
-      chrome.tabs.reload(tab.id);
+      browser.tabs.reload(tab.id);
       deadLocked = false;
     } else if (tab) {
       state = !state;
 
-      const response = await chrome.tabs.sendMessage(tab.id, {
+      const response = await browser.tabs.sendMessage(tab.id, {
         action: "toggle",
       });
       console.log(response);
@@ -102,7 +102,7 @@ slider.addEventListener("change", async () => {
   const tab = await getCurrentTab();
   if (tab) {
     try {
-      const response = await chrome.tabs.sendMessage(tab.id, {
+      const response = await browser.tabs.sendMessage(tab.id, {
         action: "slider",
         scale: slider.value,
       });
@@ -117,7 +117,7 @@ pixies.addEventListener("change", async () => {
   const tab = await getCurrentTab();
   if (tab) {
     try {
-      const response = await chrome.tabs.sendMessage(tab.id, {
+      const response = await browser.tabs.sendMessage(tab.id, {
         action: "pixies",
         pixiesVal: pixies.checked,
       });
@@ -132,7 +132,7 @@ overlay.addEventListener("change", async () => {
   const tab = await getCurrentTab();
   if (tab) {
     try {
-      const response = await chrome.tabs.sendMessage(tab.id, {
+      const response = await browser.tabs.sendMessage(tab.id, {
         action: "overlay",
         overlayVal: overlay.checked,
       });
