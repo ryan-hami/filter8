@@ -10,7 +10,7 @@ The original extension was written for chrome, this repository simply makes a fe
 ```
 git clone git@github.com:ryan-hami/filter8.git
 ```
-2. Visit the **Firefox Debugging** `about:debugging#/runtime/this-firefox`` page.
+2. Visit the **Firefox Debugging** `about:debugging#/runtime/this-firefox` page.
 3. Press `Load Temporary Add-on...`
 4. Select the **filter8** folder that you downloaded and open any file in the directory.
 5. Visit the **Firefox Addons** `about:addons`` page.
